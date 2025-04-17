@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class Raycaster : MonoBehaviour
 {
+    public event Action<GameObject> OnRaycast;
+
     private void Update()
     {
         PerformClick();
@@ -16,7 +19,8 @@ public class Raycaster : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 50f))
             {
-                Debug.Log(hit.collider.name);
+                GameObject cube = hit.collider.gameObject;
+                OnRaycast?.Invoke(cube);
             }
         }
     }

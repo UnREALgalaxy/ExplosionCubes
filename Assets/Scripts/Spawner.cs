@@ -3,15 +3,14 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _cubePrefab;
-    [SerializeField] private Raycaster _raycaster;
+    [SerializeField] private Cube _cubePrefab;
     [SerializeField, Range(6, 30)] private int _maxNewCubes = 6;
     [SerializeField, Range(2, 26)] private int _minNewCubes = 2;
 
-    private const int MaxSpreadChance = 100;
     private const int ChanceDecreaseRatio = 2;
     private const int ScaleDecreaseRatio = 2;
-    private Exploader _exploader = new Exploader();
+
+    private Exploader _exploader;
 
     private void OnValidate()
     {
@@ -19,43 +18,28 @@ public class Spawner : MonoBehaviour
             _minNewCubes = _maxNewCubes - 1;
     }
 
-    private void OnEnable() => _raycaster.OnRaycast += PerformExplosion;
-
-    private void OnDisable() => _raycaster.OnRaycast -= PerformExplosion;
-
-    private void PerformExplosion(GameObject parentCube)
+    private void Awake()
     {
-        Cube parentCubeHandler = parentCube.GetComponent<Cube>();
-        int spreadChance = parentCubeHandler.SpreadChance;
-
-        if (Random.Range(0, MaxSpreadChance) <= spreadChance)
-        {
-            CreateCubes(parentCube, spreadChance);
-        }
-
-        Destroy(parentCube);
+        _exploader = new Exploader();
     }
 
-    private void CreateCubes(GameObject parentCube, int spreadChance)
+    public void CreateCubes(Cube parentCube, int spreadChance)
     {
         List<Rigidbody> rigidbodies = new List<Rigidbody>();
 
         for (int i = 0; i < Random.Range(_minNewCubes, _maxNewCubes); i++)
         {
-            Vector3 parentPosition = parentCube.transform.position;
+            Cube childCube = Instantiate(_cubePrefab, parentCube.transform.position, Random.rotationUniform);
+
+            if (childCube.TryGetComponent<Rigidbody>(out Rigidbody rigidbody))
+            {
+                rigidbodies.Add(rigidbody);
+            }
+
             Vector3 parentScale = parentCube.transform.localScale;
-
-            GameObject childCube = Instantiate(_cubePrefab, parentPosition, Quaternion.identity);
-
-            rigidbodies.Add(childCube.GetComponent<Rigidbody>());
-
-            Cube childCubeHandler = childCube.GetComponent<Cube>();
-
-            childCubeHandler.SetChance(spreadChance / ChanceDecreaseRatio);
-            childCubeHandler.SetScale(parentScale / ScaleDecreaseRatio);
+            childCube.Initialize(spreadChance / ChanceDecreaseRatio, parentScale / ScaleDecreaseRatio);
         }
 
         _exploader.Expload(rigidbodies);
     }
 }
-

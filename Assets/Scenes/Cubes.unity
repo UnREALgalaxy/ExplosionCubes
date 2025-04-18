@@ -229,6 +229,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &434106819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 434106821}
+  - component: {fileID: 434106820}
+  m_Layer: 0
+  m_Name: CubeClickerHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &434106820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434106819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e292fe63b77234ba1843649acad619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _raycaster: {fileID: 795289717}
+  _spawner: {fileID: 586127557}
+--- !u!4 &434106821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434106819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.624063, y: 7.746566, z: -3.292881}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &516174742
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,10 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf9d77d94dd6c4429acbf7be5fe4ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubePrefab: {fileID: 8676805589891661070, guid: 4c51c026e267e6141bd3bec75765a6b7, type: 3}
-  _raycaster: {fileID: 795289717}
-  _maxNewCubes: 6
-  _minNewCubes: 2
+  _cubePrefab: {fileID: 1364813203136488980, guid: 4c51c026e267e6141bd3bec75765a6b7, type: 3}
+  _maxNewCubes: 25
+  _minNewCubes: 17
 --- !u!4 &586127558
 Transform:
   m_ObjectHideFlags: 0
@@ -585,6 +630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d056f8561a1b6409e265fa53718c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cubeLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1001 &1077315603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1046,3 +1094,4 @@ SceneRoots:
   - {fileID: 1582847639}
   - {fileID: 1799578658}
   - {fileID: 237597011}
+  - {fileID: 434106821}

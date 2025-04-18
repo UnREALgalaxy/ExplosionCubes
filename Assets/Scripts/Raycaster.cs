@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class Raycaster : MonoBehaviour
 {
-    public event Action<GameObject> OnRaycast;
+    [SerializeField] private LayerMask _cubeLayerMask;
+
+    private float _rayDistance = 50f;
+
+    public event Action<Cube> CubeClicked;
 
     private void Update()
     {
@@ -16,11 +20,13 @@ public class Raycaster : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 50f))
+            Debug.Log(nameof(hit));
+            if (Physics.Raycast(ray, out hit, _rayDistance, _cubeLayerMask))
             {
-                GameObject cube = hit.collider.gameObject;
-                OnRaycast?.Invoke(cube);
+                if (hit.collider.TryGetComponent<Cube>(out Cube cube))
+                {
+                    CubeClicked.Invoke(cube);
+                }
             }
         }
     }

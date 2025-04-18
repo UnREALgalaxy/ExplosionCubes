@@ -1,14 +1,18 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Exploader
 {
     private Vector3 _direction;
     private float _forceMagnitude = 25f;
 
-    public void SetRandomForce(Rigidbody rigidbody)
+    public void Expload(List<Rigidbody> rigidbodies)
     {
-        _direction = Random.onUnitSphere;
+        foreach (var rigidbody in rigidbodies)
+        {
+            _direction = Random.onUnitSphere;
 
-        rigidbody.AddForce(_direction * _forceMagnitude, ForceMode.Impulse); 
+            rigidbody.AddForce(_direction * _forceMagnitude, ForceMode.Impulse);
+        }
     }
 }

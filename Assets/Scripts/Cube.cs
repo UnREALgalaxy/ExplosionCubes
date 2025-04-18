@@ -6,6 +6,12 @@ public class Cube : MonoBehaviour
 
     public int SpreadChance { get; private set; } = 100;
 
+    private void Awake()
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        _colorChanger.Set(renderer);
+    }
+
     public void SetChance(int newChance)
     {
         SpreadChance = newChance;
@@ -14,10 +20,5 @@ public class Cube : MonoBehaviour
     public void SetScale(Vector3 scale)
     {
         transform.localScale = scale;
-    }
-
-    private void Start()
-    {
-        _colorChanger.Set(GetComponent<Renderer>());
     }
 }

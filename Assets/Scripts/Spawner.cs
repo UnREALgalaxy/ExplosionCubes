@@ -5,8 +5,8 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject _cubePrefab;
     [SerializeField] private Raycaster _raycaster;
-    [SerializeField, UnityEngine.Range(6, 30)] private int _maxNewCubes = 6;
-    [SerializeField, UnityEngine.Range(2, 26)] private int _minNewCubes = 2;
+    [SerializeField, Range(6, 30)] private int _maxNewCubes = 6;
+    [SerializeField, Range(2, 26)] private int _minNewCubes = 2;
 
     private const int MaxSpreadChance = 100;
     private const int ChanceDecreaseRatio = 2;

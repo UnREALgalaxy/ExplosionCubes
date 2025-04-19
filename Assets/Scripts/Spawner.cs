@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     private const int ChanceDecreaseRatio = 2;
     private const int ScaleDecreaseRatio = 2;
 
-    private Exploader _exploader;
+    private Spreader _spreader;
 
     private void OnValidate()
     {
@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
 
     private void Awake()
     {
-        _exploader = new Exploader();
+        _spreader = new Spreader();
     }
 
     public void CreateCubes(Cube parentCube, int spreadChance)
@@ -40,6 +40,6 @@ public class Spawner : MonoBehaviour
             childCube.Initialize(spreadChance / ChanceDecreaseRatio, parentScale / ScaleDecreaseRatio);
         }
 
-        _exploader.Expload(rigidbodies);
+        _spreader.Expload(rigidbodies);
     }
 }

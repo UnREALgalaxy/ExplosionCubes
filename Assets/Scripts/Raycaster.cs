@@ -20,7 +20,7 @@ public class Raycaster : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            Debug.Log(nameof(hit));
+
             if (Physics.Raycast(ray, out hit, _rayDistance, _cubeLayerMask))
             {
                 if (hit.collider.TryGetComponent<Cube>(out Cube cube))

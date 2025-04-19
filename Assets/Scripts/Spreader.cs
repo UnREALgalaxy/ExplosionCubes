@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Exploader
+public class Spreader
 {
     private Vector3 _direction;
     private float _forceMagnitude = 25f;
